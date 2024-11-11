@@ -2,13 +2,16 @@ using UnityEngine;
 
 public class PlayerState
 {
+    private static readonly int YVelocity = Animator.StringToHash("YVelocity");
+    
     private readonly string animBoolName;
     protected readonly Player Player;
     protected readonly PlayerStateMachine StateMachine;
 
+    protected Rigidbody2D Rb;
     protected float XInput;
 
-    protected PlayerState(Player player, PlayerStateMachine stateMachine, string animBoolName)
+    public PlayerState(Player player, PlayerStateMachine stateMachine, string animBoolName)
     {
         Player = player;
         StateMachine = stateMachine;
@@ -17,16 +20,20 @@ public class PlayerState
 
     public virtual void Enter()
     {
-        Player.anim.SetBool(animBoolName, true);
+        Player.Anim.SetBool(animBoolName, true);
+        
+        Rb = Player.Rb;
     }
 
     public virtual void Update()
     {
         XInput = Input.GetAxisRaw("Horizontal");
+        
+        Player.Anim.SetFloat(YVelocity, Rb.velocity.y);
     }
 
     public virtual void Exit()
     {
-        Player.anim.SetBool(animBoolName, false);
+        Player.Anim.SetBool(animBoolName, false);
     }
 }

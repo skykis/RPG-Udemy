@@ -1,4 +1,4 @@
-public class PlayerMoveState : PlayerState
+public class PlayerMoveState : PlayerGroundedState
 {
     public PlayerMoveState(Player player, PlayerStateMachine stateMachine, string animBoolName) : base(player,
         stateMachine, animBoolName)
@@ -14,7 +14,7 @@ public class PlayerMoveState : PlayerState
     {
         base.Update();
 
-        Player.SetVelocity(XInput * Player.moveSpeed, Player.rb.velocity.y);
+        Player.SetVelocity(XInput * Player.moveSpeed, Rb.velocity.y);
 
         if (XInput == 0) StateMachine.ChangeState(Player.IdleState);
     }
