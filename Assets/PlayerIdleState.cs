@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class PlayerIdleState : PlayerState
 {
     public PlayerIdleState(Player player, PlayerStateMachine stateMachine, string animBoolName) : base(player,
@@ -13,6 +15,8 @@ public class PlayerIdleState : PlayerState
     public override void Update()
     {
         base.Update();
+
+        if (Input.GetKeyDown(KeyCode.N)) StateMachine.ChangeState(Player.MoveState);
     }
 
     public override void Exit()

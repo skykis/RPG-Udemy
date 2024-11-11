@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public Animator anim { get; private set; }
+
     public PlayerStateMachine StateMachine { get; private set; }
 
     public PlayerIdleState IdleState { get; private set; }
@@ -17,6 +19,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        anim = GetComponentInChildren<Animator>();
         StateMachine.Initialize(IdleState);
     }
 
