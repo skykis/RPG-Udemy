@@ -3,8 +3,10 @@ using UnityEngine;
 public class PlayerState
 {
     private readonly string animBoolName;
-    protected Player Player;
-    protected PlayerStateMachine StateMachine;
+    protected readonly Player Player;
+    protected readonly PlayerStateMachine StateMachine;
+
+    protected float XInput;
 
     protected PlayerState(Player player, PlayerStateMachine stateMachine, string animBoolName)
     {
@@ -20,7 +22,7 @@ public class PlayerState
 
     public virtual void Update()
     {
-        Debug.Log("I am in " + animBoolName);
+        XInput = Input.GetAxisRaw("Horizontal");
     }
 
     public virtual void Exit()
