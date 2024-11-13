@@ -14,7 +14,14 @@ public class PlayerIdleState : PlayerGroundedState
     {
         base.Update();
 
-        if (XInput != 0) StateMachine.ChangeState(Player.MoveState);
+        if (XInput == 0)
+        {
+            Player.SetVelocity(0, Rb.velocity.y);
+        }
+        else
+        {
+            StateMachine.ChangeState(Player.MoveState);
+        }
     }
 
     public override void Exit()

@@ -32,12 +32,12 @@ public class Player : MonoBehaviour
     #region States
 
     public PlayerStateMachine StateMachine { get; private set; }
-
     public PlayerIdleState IdleState { get; private set; }
     public PlayerMoveState MoveState { get; private set; }
     public PlayerJumpState JumpState { get; private set; }
     public PlayerAirState AirState { get; private set; }
     public PlayerDashState DashState { get; private set; }
+    public PlayerWallSlideState WallSlideState { get; private set; }
 
     #endregion
 
@@ -50,6 +50,7 @@ public class Player : MonoBehaviour
         JumpState = new PlayerJumpState(this, StateMachine, "Jump");
         AirState = new PlayerAirState(this, StateMachine, "Jump");
         DashState = new PlayerDashState(this, StateMachine, "Dash");
+        WallSlideState = new PlayerWallSlideState(this, StateMachine, "WallSlide");
     }
 
     private void Start()
@@ -75,6 +76,9 @@ public class Player : MonoBehaviour
 
     public bool IsGroundDetected() =>
         Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, whatIsGround);
+
+    public bool IsWallDetected() => Physics2D.Raycast(wallCheck.position, Vector2.right * FacingDirection,
+        wallCheckDistance, whatIsGround);
 
     private void OnDrawGizmos()
     {

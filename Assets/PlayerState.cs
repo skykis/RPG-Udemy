@@ -10,7 +10,7 @@ public class PlayerState
 
     protected Rigidbody2D Rb;
     protected float XInput;
-
+    protected float YInput;
     protected float StateTimer;
     
     public PlayerState(Player player, PlayerStateMachine stateMachine, string animBoolName)
@@ -31,6 +31,7 @@ public class PlayerState
     {
         StateTimer -= Time.deltaTime;
         XInput = Input.GetAxisRaw("Horizontal");
+        YInput = Input.GetAxisRaw("Vertical");
         
         Player.Anim.SetFloat(YVelocity, Rb.velocity.y);
     }
