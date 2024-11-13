@@ -8,17 +8,15 @@ public class PlayerIdleState : PlayerGroundedState
     public override void Enter()
     {
         base.Enter();
+        
+        Player.SetVelocity(0, 0);
     }
 
     public override void Update()
     {
         base.Update();
 
-        if (XInput == 0)
-        {
-            Player.SetVelocity(0, Rb.velocity.y);
-        }
-        else
+        if (XInput != 0)
         {
             StateMachine.ChangeState(Player.MoveState);
         }
