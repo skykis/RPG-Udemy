@@ -155,6 +155,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 8
   jumpForce: 12
+  dashCooldown: 1
+  dashSpeed: 25
+  dashDuration: 0.2
+  dashDirection: 0
   groundCheck: {fileID: 431903808}
   groundCheckDistance: 0.15
   wallCheck: {fileID: 657400474}
@@ -322,7 +326,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.02, y: -4.62, z: 0}
-  m_LocalScale: {x: 18.03386, y: 1, z: 1}
+  m_LocalScale: {x: 25.371746, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}

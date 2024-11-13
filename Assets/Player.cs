@@ -2,20 +2,26 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [Header("Move info")] 
-    public float moveSpeed = 8f;
-    public float jumpForce = 12f;
-    
-    [Header("Collision info")]
+    [Header("Move info")]
+    public float moveSpeed;
+    public float jumpForce;
+    [Header("Dash info")]
+    [SerializeField] private float dashCooldown;
+    private float dashUsageTimer;
+    public float dashSpeed;
+    public float dashDuration;
+    public float dashDirection;
+
+    [Header("Collision info")] 
     [SerializeField] private Transform groundCheck;
     [SerializeField] private float groundCheckDistance;
     [SerializeField] private Transform wallCheck;
     [SerializeField] private float wallCheckDistance;
     [SerializeField] private LayerMask whatIsGround;
-    
-    public int FacingDir { get; private set; }
+
+    public int FacingDirection { get; private set; } = 1;
     private bool facingRight = true;
-    
+
     #region Components
 
     public Animator Anim { get; private set; }
@@ -30,7 +36,8 @@ public class Player : MonoBehaviour
     public PlayerIdleState IdleState { get; private set; }
     public PlayerMoveState MoveState { get; private set; }
     public PlayerJumpState JumpState { get; private set; }
-    public PlayerAirState AirState { get; private set;}
+    public PlayerAirState AirState { get; private set; }
+    public PlayerDashState DashState { get; private set; }
 
     #endregion
 
@@ -42,6 +49,7 @@ public class Player : MonoBehaviour
         MoveState = new PlayerMoveState(this, StateMachine, "Move");
         JumpState = new PlayerJumpState(this, StateMachine, "Jump");
         AirState = new PlayerAirState(this, StateMachine, "Jump");
+        DashState = new PlayerDashState(this, StateMachine, "Dash");
     }
 
     private void Start()
@@ -55,6 +63,8 @@ public class Player : MonoBehaviour
     private void Update()
     {
         StateMachine.CurrentState.Update();
+
+        CheckForDashInput();
     }
 
     public void SetVelocity(float xVelocity, float yVelocity)
@@ -65,7 +75,7 @@ public class Player : MonoBehaviour
 
     public bool IsGroundDetected() =>
         Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, whatIsGround);
-    
+
     private void OnDrawGizmos()
     {
         var groundCheckPosition = groundCheck.position;
@@ -78,12 +88,12 @@ public class Player : MonoBehaviour
 
     private void Flip()
     {
-        FacingDir = FacingDir * -1;
+        FacingDirection = FacingDirection * -1;
         facingRight = !facingRight;
         transform.Rotate(0, 180, 0);
     }
 
-    public void FlipController(float x)
+    private void FlipController(float x)
     {
         switch (x)
         {
@@ -91,6 +101,22 @@ public class Player : MonoBehaviour
             case < 0 when facingRight:
                 Flip();
                 break;
+        }
+    }
+
+    private void CheckForDashInput()
+    {
+        dashUsageTimer -= Time.deltaTime;
+        if (Input.GetKeyDown(KeyCode.LeftShift) && dashUsageTimer < 0)
+        {
+            dashUsageTimer = dashCooldown;
+            dashDirection = Input.GetAxisRaw("Horizontal");
+            if (dashDirection == 0)
+            {
+                dashDirection = FacingDirection;
+            }
+            
+            StateMachine.ChangeState(DashState);
         }
     }
 }
