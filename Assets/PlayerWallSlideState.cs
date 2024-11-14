@@ -17,25 +17,25 @@ public class PlayerWallSlideState : PlayerState
 
         if (!Player.IsWallDetected())
         {
-            StateMachine.ChangeState(Player.IdleState);
+            StateMachine.ChangeState(Player.Idle);
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            StateMachine.ChangeState(Player.WallJumpState);
+            StateMachine.ChangeState(Player.WallJump);
             return;
         }
         
         if (XInput != 0 && !Mathf.Approximately(Player.FacingDirection, XInput))
         {
-            StateMachine.ChangeState(Player.IdleState);
+            StateMachine.ChangeState(Player.Idle);
         }
         
         Rb.velocity = YInput < 0 ? new Vector2(0, Rb.velocity.y) : new Vector2(0, Rb.velocity.y * 0.7f);
         
         if (Player.IsGroundDetected())
         {
-            StateMachine.ChangeState(Player.IdleState);
+            StateMachine.ChangeState(Player.Idle);
         }
     }
 

@@ -18,7 +18,7 @@ public class PlayerMoveState : PlayerGroundedState
 
         //  Player.IsWallDetected() 暂时不加，允许顶墙跑动
         if (XInput == 0)
-            StateMachine.ChangeState(Player.IdleState);
+            StateMachine.ChangeState(Player.Idle);
     }
 
     public override void Exit()

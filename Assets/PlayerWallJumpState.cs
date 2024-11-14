@@ -18,12 +18,12 @@ public class PlayerWallJumpState : PlayerState
 
         if (StateTimer < 0)
         {
-            StateMachine.ChangeState(Player.AirState);
+            StateMachine.ChangeState(Player.Air);
         }
 
         if (Player.IsGroundDetected())
         {
-            StateMachine.ChangeState(Player.IdleState);
+            StateMachine.ChangeState(Player.Idle);
         }
     }
 

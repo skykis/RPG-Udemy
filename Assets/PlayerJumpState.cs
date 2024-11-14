@@ -20,7 +20,7 @@ public class PlayerJumpState : PlayerState
         
         if (Rb.velocity.y < 0)
         {
-            StateMachine.ChangeState(Player.AirState);
+            StateMachine.ChangeState(Player.Air);
         }
     }
 
