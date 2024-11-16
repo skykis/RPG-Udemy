@@ -22,8 +22,14 @@ public class PlayerPrimaryAttackState : PlayerState
         }
 
         Player.Anim.SetInteger(ComboCounter, comboCounter);
-
-        Player.SetVelocity(Player.attackMovement[comboCounter].x * Player.FacingDirection,
+        
+        float attackDirection = Player.FacingDirection;
+        if (XInput != 0)
+        {
+            attackDirection = XInput;
+        }
+        
+        Player.SetVelocity(Player.attackMovement[comboCounter].x * attackDirection,
             Player.attackMovement[comboCounter].y);
 
         StateTimer = 0.1f;
