@@ -13,7 +13,7 @@ public class PlayerMoveState : PlayerGroundedState
     public override void Update()
     {
         base.Update();
-        
+
         Player.SetVelocity(XInput * Player.moveSpeed, Rb.velocity.y);
 
         //  Player.IsWallDetected() 暂时不加，允许顶墙跑动

@@ -5,10 +5,11 @@ public class PlayerPrimaryAttackState : PlayerState
     private static readonly int ComboCounter = Animator.StringToHash("ComboCounter");
 
     private int comboCounter;
+    private readonly float comboWindow = 2;
     private float lastTimeAttacked;
-    private float comboWindow = 2;
-    
-    public PlayerPrimaryAttackState(Player player, PlayerStateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName)
+
+    public PlayerPrimaryAttackState(Player player, PlayerStateMachine stateMachine, string animBoolName) : base(player,
+        stateMachine, animBoolName)
     {
     }
 
@@ -16,19 +17,13 @@ public class PlayerPrimaryAttackState : PlayerState
     {
         base.Enter();
 
-        if (CheckComboWindow())
-        {
-            comboCounter = 0;
-        }
+        if (CheckComboWindow()) comboCounter = 0;
 
         Player.Anim.SetInteger(ComboCounter, comboCounter);
-        
+
         float attackDirection = Player.FacingDirection;
-        if (XInput != 0)
-        {
-            attackDirection = XInput;
-        }
-        
+        if (XInput != 0) attackDirection = XInput;
+
         Player.SetVelocity(Player.attackMovement[comboCounter].x * attackDirection,
             Player.attackMovement[comboCounter].y);
 
@@ -39,15 +34,9 @@ public class PlayerPrimaryAttackState : PlayerState
     {
         base.Update();
 
-        if (StateTimer < 0)
-        {
-            Player.SetZeroVelocity();
-        }
-        
-        if (TriggerCalled)
-        {
-            StateMachine.ChangeState(Player.Idle);
-        }
+        if (StateTimer < 0) Player.SetZeroVelocity();
+
+        if (TriggerCalled) StateMachine.ChangeState(Player.Idle);
     }
 
     public override void Exit()
@@ -55,7 +44,7 @@ public class PlayerPrimaryAttackState : PlayerState
         base.Exit();
 
         Player.StartCoroutine(nameof(global::Player.BusyFor), 0.2f);
-        
+
         comboCounter++;
         lastTimeAttacked = Time.time;
     }

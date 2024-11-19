@@ -1,6 +1,7 @@
 public class PlayerWallJumpState : PlayerState
 {
-    public PlayerWallJumpState(Player player, PlayerStateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName)
+    public PlayerWallJumpState(Player player, PlayerStateMachine stateMachine, string animBoolName) : base(player,
+        stateMachine, animBoolName)
     {
     }
 
@@ -16,15 +17,9 @@ public class PlayerWallJumpState : PlayerState
     {
         base.Update();
 
-        if (StateTimer < 0)
-        {
-            StateMachine.ChangeState(Player.Air);
-        }
+        if (StateTimer < 0) StateMachine.ChangeState(Player.Air);
 
-        if (Player.IsGroundDetected())
-        {
-            StateMachine.ChangeState(Player.Idle);
-        }
+        if (Player.IsGroundDetected()) StateMachine.ChangeState(Player.Idle);
     }
 
     public override void Exit()

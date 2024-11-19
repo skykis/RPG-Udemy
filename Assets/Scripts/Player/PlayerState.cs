@@ -3,17 +3,17 @@ using UnityEngine;
 public class PlayerState
 {
     private static readonly int YVelocity = Animator.StringToHash("YVelocity");
-    
+
     private readonly string animBoolName;
     protected readonly Player Player;
     protected readonly PlayerStateMachine StateMachine;
 
     protected Rigidbody2D Rb;
-    protected float XInput;
-    protected float YInput;
     protected float StateTimer;
     protected bool TriggerCalled;
-    
+    protected float XInput;
+    protected float YInput;
+
     public PlayerState(Player player, PlayerStateMachine stateMachine, string animBoolName)
     {
         Player = player;
@@ -33,7 +33,7 @@ public class PlayerState
         StateTimer -= Time.deltaTime;
         XInput = Input.GetAxisRaw("Horizontal");
         YInput = Input.GetAxisRaw("Vertical");
-        
+
         Player.Anim.SetFloat(YVelocity, Rb.velocity.y);
     }
 
