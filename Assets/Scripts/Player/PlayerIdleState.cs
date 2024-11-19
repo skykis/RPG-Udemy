@@ -1,26 +1,29 @@
-public class PlayerIdleState : PlayerGroundedState
+namespace Player
 {
-    public PlayerIdleState(Player player, PlayerStateMachine stateMachine, string animBoolName) : base(player,
-        stateMachine, animBoolName)
+    public class PlayerIdleState : PlayerGroundedState
     {
-    }
+        public PlayerIdleState(Player player, PlayerStateMachine stateMachine, string animBoolName) : base(player,
+            stateMachine, animBoolName)
+        {
+        }
 
-    public override void Enter()
-    {
-        base.Enter();
+        public override void Enter()
+        {
+            base.Enter();
 
-        Player.SetVelocity(0, 0);
-    }
+            Player.SetVelocity(0, 0);
+        }
 
-    public override void Update()
-    {
-        base.Update();
+        public override void Update()
+        {
+            base.Update();
 
-        if (XInput != 0 && !Player.IsBusy) StateMachine.ChangeState(Player.Move);
-    }
+            if (XInput != 0 && !Player.IsBusy) StateMachine.ChangeState(Player.Move);
+        }
 
-    public override void Exit()
-    {
-        base.Exit();
+        public override void Exit()
+        {
+            base.Exit();
+        }
     }
 }

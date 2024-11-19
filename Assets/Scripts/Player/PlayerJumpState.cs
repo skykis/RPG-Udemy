@@ -1,26 +1,29 @@
-public class PlayerJumpState : PlayerState
+namespace Player
 {
-    public PlayerJumpState(Player player, PlayerStateMachine stateMachine, string animBoolName) : base(player,
-        stateMachine, animBoolName)
+    public class PlayerJumpState : PlayerState
     {
-    }
+        public PlayerJumpState(Player player, PlayerStateMachine stateMachine, string animBoolName) : base(player,
+            stateMachine, animBoolName)
+        {
+        }
 
-    public override void Enter()
-    {
-        base.Enter();
+        public override void Enter()
+        {
+            base.Enter();
 
-        Player.SetVelocity(Rb.velocity.x, Player.jumpForce);
-    }
+            Player.SetVelocity(Rb.velocity.x, Player.jumpForce);
+        }
 
-    public override void Update()
-    {
-        base.Update();
+        public override void Update()
+        {
+            base.Update();
 
-        if (Rb.velocity.y < 0) StateMachine.ChangeState(Player.Air);
-    }
+            if (Rb.velocity.y < 0) StateMachine.ChangeState(Player.Air);
+        }
 
-    public override void Exit()
-    {
-        base.Exit();
+        public override void Exit()
+        {
+            base.Exit();
+        }
     }
 }

@@ -1,11 +1,14 @@
 using UnityEngine;
 
-public class PlayerAnimationTriggers : MonoBehaviour
+namespace Player
 {
-    private Player Player => GetComponentInParent<Player>();
-
-    private void AnimationTrigger()
+    public class PlayerAnimationTriggers : MonoBehaviour
     {
-        Player.AnimationTrigger();
+        private Player Player => GetComponentInParent<Player>();
+
+        private void AnimationTrigger()
+        {
+            Player.AnimationTrigger();
+        }
     }
 }
