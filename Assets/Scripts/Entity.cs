@@ -67,14 +67,14 @@ public class Entity : MonoBehaviour
 
     #region Flip
 
-    private void Flip()
+    public virtual void Flip()
     {
         FacingDirection = FacingDirection * -1;
         facingRight = !facingRight;
         transform.Rotate(0, 180, 0);
     }
 
-    private void FlipController(float x)
+    public virtual void FlipController(float x)
     {
         switch (x)
         {
