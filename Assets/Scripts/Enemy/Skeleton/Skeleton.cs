@@ -5,8 +5,9 @@ namespace Enemy.Skeleton
 
         #region state
 
-        public SkeletonIdleState Idle { get; private set; }
-        public SkeletonMoveState Move { get; private set; }
+        public SkeletonIdleState IdleState { get; private set; }
+        public SkeletonMoveState MoveState { get; private set; }
+        public SkeletonBattleState BattleState { get; private set; }
 
         #endregion
         
@@ -14,15 +15,16 @@ namespace Enemy.Skeleton
         {
             base.Awake();
             
-            Idle = new SkeletonIdleState(StateMachine, this, "Idle", this);
-            Move = new SkeletonMoveState(StateMachine, this, "Move", this);
+            IdleState = new SkeletonIdleState(StateMachine, this, "Idle", this);
+            MoveState = new SkeletonMoveState(StateMachine, this, "Move", this);
+            BattleState = new SkeletonBattleState(StateMachine, this, "Move", this);
         }
 
         protected override void Start()
         {
             base.Start();
             
-            StateMachine.Initialize(Idle);
+            StateMachine.Initialize(IdleState);
         }
 
         protected override void Update()

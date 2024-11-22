@@ -1,19 +1,16 @@
 namespace Enemy.Skeleton
 {
-    public class SkeletonIdleState : EnemyState
+    public class SkeletonIdleState : SkeletonGroundState
     {
-        private Skeleton enemy;
-
-        public SkeletonIdleState(EnemyStateMachine stateMachine, Enemy enemyBase, string animBoolName, Skeleton enemy) : base(stateMachine, enemyBase, animBoolName)
+        public SkeletonIdleState(EnemyStateMachine stateMachine, Enemy enemyBase, string animBoolName, Skeleton enemy) : base(stateMachine, enemyBase, animBoolName, enemy)
         {
-            this.enemy = enemy;
         }
 
         public override void Enter()
         {
             base.Enter();
 
-            StateTimer = enemy.idleTime;
+            StateTimer = Enemy.idleTime;
         }
 
         public override void Update()
@@ -22,7 +19,7 @@ namespace Enemy.Skeleton
 
             if (StateTimer < 0)
             {
-                StateMachine.ChangeState(enemy.Move);
+                StateMachine.ChangeState(Enemy.MoveState);
             }
         }
 
