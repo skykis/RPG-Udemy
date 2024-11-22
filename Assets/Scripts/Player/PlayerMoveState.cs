@@ -20,7 +20,7 @@ namespace Player
 
             //  Player.IsWallDetected() 暂时不加，允许顶墙跑动
             if (XInput == 0)
-                StateMachine.ChangeState(Player.Idle);
+                StateMachine.ChangeState(Player.IdleState);
         }
 
         public override void Exit()

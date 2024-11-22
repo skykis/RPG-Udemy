@@ -38,7 +38,7 @@ namespace Player
 
             if (StateTimer < 0) Player.SetZeroVelocity();
 
-            if (TriggerCalled) StateMachine.ChangeState(Player.Idle);
+            if (TriggerCalled) StateMachine.ChangeState(Player.IdleState);
         }
 
         public override void Exit()

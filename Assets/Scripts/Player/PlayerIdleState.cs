@@ -18,7 +18,7 @@ namespace Player
         {
             base.Update();
 
-            if (XInput != 0 && !Player.IsBusy) StateMachine.ChangeState(Player.Move);
+            if (XInput != 0 && !Player.IsBusy) StateMachine.ChangeState(Player.MoveState);
         }
 
         public override void Exit()

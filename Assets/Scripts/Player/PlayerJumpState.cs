@@ -18,7 +18,7 @@ namespace Player
         {
             base.Update();
 
-            if (Rb.velocity.y < 0) StateMachine.ChangeState(Player.Air);
+            if (Rb.velocity.y < 0) StateMachine.ChangeState(Player.AirState);
         }
 
         public override void Exit()

@@ -19,11 +19,11 @@ namespace Player
         {
             base.Update();
         
-            if (Player.IsWallDetected()) StateMachine.ChangeState(Player.WallSlide);
+            if (Player.IsWallDetected()) StateMachine.ChangeState(Player.WallSlideState);
         
-            if (StateTimer < 0) StateMachine.ChangeState(Player.Air);
+            if (StateTimer < 0) StateMachine.ChangeState(Player.AirState);
 
-            if (Player.IsGroundDetected()) StateMachine.ChangeState(Player.Idle);
+            if (Player.IsGroundDetected()) StateMachine.ChangeState(Player.IdleState);
         }
 
         public override void Exit()

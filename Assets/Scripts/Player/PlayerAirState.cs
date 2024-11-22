@@ -16,8 +16,8 @@ namespace Player
         {
             base.Update();
         
-            if (Player.IsWallDetected()) StateMachine.ChangeState(Player.WallSlide);
-            if (Player.IsGroundDetected()) StateMachine.ChangeState(Player.Idle);
+            if (Player.IsWallDetected()) StateMachine.ChangeState(Player.WallSlideState);
+            if (Player.IsGroundDetected()) StateMachine.ChangeState(Player.IdleState);
             if (XInput != 0) Player.SetVelocity(Player.moveSpeed * 0.8f * XInput, Rb.velocity.y);
         }
 

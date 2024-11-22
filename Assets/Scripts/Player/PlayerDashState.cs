@@ -18,11 +18,11 @@ namespace Player
         {
             base.Update();
 
-            if (!Player.IsGroundDetected() && Player.IsWallDetected()) StateMachine.ChangeState(Player.WallSlide);
+            if (!Player.IsGroundDetected() && Player.IsWallDetected()) StateMachine.ChangeState(Player.WallSlideState);
 
             Player.SetVelocity(Player.dashSpeed * Player.dashDirection, 0);
 
-            if (StateTimer < 0) StateMachine.ChangeState(Player.Idle);
+            if (StateTimer < 0) StateMachine.ChangeState(Player.IdleState);
         }
 
         public override void Exit()

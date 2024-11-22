@@ -21,14 +21,14 @@ namespace Player
         #region States
 
         private PlayerStateMachine StateMachine { get; set; }
-        public PlayerIdleState Idle { get; private set; }
-        public PlayerMoveState Move { get; private set; }
-        public PlayerJumpState Jump { get; private set; }
-        public PlayerAirState Air { get; private set; }
-        public PlayerDashState Dash { get; private set; }
-        public PlayerWallSlideState WallSlide { get; private set; }
-        public PlayerWallJumpState WallJump { get; private set; }
-        public PlayerPrimaryAttackState PrimaryAttack { get; private set; }
+        public PlayerIdleState IdleState { get; private set; }
+        public PlayerMoveState MoveState { get; private set; }
+        public PlayerJumpState JumpState { get; private set; }
+        public PlayerAirState AirState { get; private set; }
+        public PlayerDashState DashState { get; private set; }
+        public PlayerWallSlideState WallSlideState { get; private set; }
+        public PlayerWallJumpState WallJumpState { get; private set; }
+        public PlayerPrimaryAttackState PrimaryAttackState { get; private set; }
 
         #endregion
 
@@ -38,21 +38,21 @@ namespace Player
             
             StateMachine = new PlayerStateMachine();
 
-            Idle = new PlayerIdleState(this, StateMachine, "Idle");
-            Move = new PlayerMoveState(this, StateMachine, "Move");
-            Jump = new PlayerJumpState(this, StateMachine, "Jump");
-            Air = new PlayerAirState(this, StateMachine, "Jump");
-            Dash = new PlayerDashState(this, StateMachine, "Dash");
-            WallSlide = new PlayerWallSlideState(this, StateMachine, "WallSlide");
-            WallJump = new PlayerWallJumpState(this, StateMachine, "Jump");
-            PrimaryAttack = new PlayerPrimaryAttackState(this, StateMachine, "Attack");
+            IdleState = new PlayerIdleState(this, StateMachine, "Idle");
+            MoveState = new PlayerMoveState(this, StateMachine, "Move");
+            JumpState = new PlayerJumpState(this, StateMachine, "Jump");
+            AirState = new PlayerAirState(this, StateMachine, "Jump");
+            DashState = new PlayerDashState(this, StateMachine, "Dash");
+            WallSlideState = new PlayerWallSlideState(this, StateMachine, "WallSlide");
+            WallJumpState = new PlayerWallJumpState(this, StateMachine, "Jump");
+            PrimaryAttackState = new PlayerPrimaryAttackState(this, StateMachine, "Attack");
         }
 
         protected override void Start()
         {
             base.Start();
             
-            StateMachine.Initialize(Idle);
+            StateMachine.Initialize(IdleState);
         }
 
         protected override void Update()
@@ -90,7 +90,7 @@ namespace Player
                     dashDirection = FacingDirection;
                 }
 
-                StateMachine.ChangeState(Dash);
+                StateMachine.ChangeState(DashState);
             }
         }
     }

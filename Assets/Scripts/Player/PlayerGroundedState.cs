@@ -18,15 +18,15 @@ namespace Player
         {
             base.Update();
 
-            if (Input.GetKey(KeyCode.Mouse0)) StateMachine.ChangeState(Player.PrimaryAttack);
+            if (Input.GetKey(KeyCode.Mouse0)) StateMachine.ChangeState(Player.PrimaryAttackState);
 
             if (Player.IsGroundDetected())
             {
-                if (Input.GetKeyDown(KeyCode.Space)) StateMachine.ChangeState(Player.Jump);
+                if (Input.GetKeyDown(KeyCode.Space)) StateMachine.ChangeState(Player.JumpState);
             }
             else
             {
-                StateMachine.ChangeState(Player.Air);
+                StateMachine.ChangeState(Player.AirState);
             }
         }
 
