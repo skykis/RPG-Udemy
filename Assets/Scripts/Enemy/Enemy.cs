@@ -1,13 +1,20 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Enemy
 {
     public class Enemy : Entity
     {
         [SerializeField] protected LayerMask whatIsPlayer;
-        [Header("Move info")] public float moveSpeed;
+        [Header("Move info")]
+        public float moveSpeed;
         public float idleTime;
-        [Header("Attack info")] public float attackDistance;
+        public float battleTime;
+        
+        [Header("Attack info")]
+        public float attackDistance;
+        public float attackCooldown;
+        [HideInInspector]public float lastTimeAttacked;
 
         #region States
 
@@ -33,6 +40,8 @@ namespace Enemy
             StateMachine.CurrentState.Update();
         }
 
+        public virtual void AnimationTrigger() => StateMachine.CurrentState.AnimationFinishedTrigger();
+        
         public virtual RaycastHit2D IsPlayerDetected() =>
             Physics2D.Raycast(wallCheck.position, Vector2.right * FacingDirection, 50, whatIsPlayer);
 
