@@ -7,6 +7,7 @@ namespace Player
     {
         [Header("Attack detail")] 
         public Vector2[] attackMovement;
+        
         public bool IsBusy { get; private set; }
         [Header("Move info")] 
         public float moveSpeed;

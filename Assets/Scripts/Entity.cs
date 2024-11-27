@@ -6,10 +6,12 @@ public class Entity : MonoBehaviour
 
     public Animator Anim { get; private set; }
     public Rigidbody2D Rb { get; private set; }
-
+    public EntityFx FX { get; private set; }
     #endregion
     
     [Header("Collision info")] 
+    public Transform attackCheck;
+    public float attackCheckRadius;
     [SerializeField] protected Transform groundCheck;
     [SerializeField] protected float groundCheckDistance;
     [SerializeField] protected Transform wallCheck;
@@ -25,6 +27,7 @@ public class Entity : MonoBehaviour
 
     protected virtual void Start()
     {
+        FX = GetComponentInChildren<EntityFx>();
         Anim = GetComponentInChildren<Animator>();
         Rb = GetComponent<Rigidbody2D>();
     }
@@ -33,6 +36,11 @@ public class Entity : MonoBehaviour
     {
     }
 
+    public virtual void Damage()
+    {
+        FX.StartCoroutine("FlashFX");
+    }
+    
     #region Velocity
 
     public void SetZeroVelocity() => Rb.velocity = new Vector2(0, 0);
@@ -61,6 +69,9 @@ public class Entity : MonoBehaviour
 
         var wallCheckPosition = wallCheck.position;
         Gizmos.DrawLine(wallCheckPosition, new Vector3(wallCheckPosition.x + wallCheckDistance, wallCheckPosition.y));
+
+        var attackCheckPosition = attackCheck.position;
+        Gizmos.DrawWireSphere(attackCheckPosition, attackCheckRadius);
     }
 
     #endregion
