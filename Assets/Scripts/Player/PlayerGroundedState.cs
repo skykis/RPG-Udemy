@@ -18,7 +18,15 @@ namespace Player
         {
             base.Update();
 
-            if (Input.GetKey(KeyCode.Mouse0)) StateMachine.ChangeState(Player.PrimaryAttackState);
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                StateMachine.ChangeState(Player.CounterAttackState);
+            }
+
+            if (Input.GetKey(KeyCode.Mouse0))
+            {
+                StateMachine.ChangeState(Player.PrimaryAttackState);
+            }
 
             if (Player.IsGroundDetected())
             {

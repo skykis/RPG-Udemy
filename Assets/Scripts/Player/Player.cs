@@ -7,6 +7,7 @@ namespace Player
     {
         [Header("Attack detail")] 
         public Vector2[] attackMovement;
+        public float counterAttackDuration = 0.2f;
         
         public bool IsBusy { get; private set; }
         [Header("Move info")] 
@@ -30,6 +31,7 @@ namespace Player
         public PlayerWallSlideState WallSlideState { get; private set; }
         public PlayerWallJumpState WallJumpState { get; private set; }
         public PlayerPrimaryAttackState PrimaryAttackState { get; private set; }
+        public PlayerCounterAttackState CounterAttackState { get; private set; }
 
         #endregion
 
@@ -47,6 +49,7 @@ namespace Player
             WallSlideState = new PlayerWallSlideState(this, StateMachine, "WallSlide");
             WallJumpState = new PlayerWallJumpState(this, StateMachine, "Jump");
             PrimaryAttackState = new PlayerPrimaryAttackState(this, StateMachine, "Attack");
+            CounterAttackState = new PlayerCounterAttackState(this, StateMachine, "CounterAttack");
         }
 
         protected override void Start()

@@ -24,5 +24,8 @@ namespace Enemy.Skeleton
                 }
             }
         }
+
+        private void OpenCounterWindow() => Enemy.OpenCounterAttackWindow();
+        private void CloseCounterWindow() => Enemy.CloseCounterAttackWindow();
     }
 }

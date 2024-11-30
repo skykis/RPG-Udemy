@@ -6,6 +6,13 @@ namespace Enemy
     public class Enemy : Entity
     {
         [SerializeField] protected LayerMask whatIsPlayer;
+        
+        [Header("Stunned info")]
+        public float stunDuration;
+        public Vector2 stunDirection;
+        private bool canBeStunned;
+        [SerializeField] protected GameObject counterImage;
+        
         [Header("Move info")]
         public float moveSpeed;
         public float idleTime;
@@ -40,6 +47,28 @@ namespace Enemy
             StateMachine.CurrentState.Update();
         }
 
+        public virtual void OpenCounterAttackWindow()
+        {
+            canBeStunned = true;
+            counterImage.SetActive(true);
+        }
+        
+        public virtual void CloseCounterAttackWindow()
+        {
+            canBeStunned = false;
+            counterImage.SetActive(false);
+        }
+
+        public virtual bool CanBeStunned()
+        {
+            if (canBeStunned)
+            {
+                CloseCounterAttackWindow();
+                return true;
+            }
+            return false;
+        }
+        
         public virtual void AnimationTrigger() => StateMachine.CurrentState.AnimationFinishedTrigger();
         
         public virtual RaycastHit2D IsPlayerDetected() =>
