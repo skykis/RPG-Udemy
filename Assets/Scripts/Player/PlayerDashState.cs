@@ -11,6 +11,8 @@ namespace Player
         {
             base.Enter();
 
+            Player.Skill.Clone.CreateClone(Player.transform);
+            
             StateTimer = Player.dashDuration;
         }
 

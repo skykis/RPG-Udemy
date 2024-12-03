@@ -14,12 +14,14 @@ namespace Player
         public float moveSpeed;
         public float jumpForce;
         [Header("Dash info")] 
-        [SerializeField] private float dashCooldown;
-        private float dashUsageTimer;
         public float dashSpeed;
         public float dashDuration;
         public float dashDirection;
 
+        
+        public SkillManager Skill {get; private set;}
+        
+        
         #region States
 
         private PlayerStateMachine StateMachine { get; set; }
@@ -55,6 +57,8 @@ namespace Player
         protected override void Start()
         {
             base.Start();
+
+            Skill = SkillManager.instance;
             
             StateMachine.Initialize(IdleState);
         }
@@ -83,11 +87,8 @@ namespace Player
                 return;
             }
 
-            dashUsageTimer -= Time.deltaTime;
-
-            if (Input.GetKeyDown(KeyCode.LeftShift) && dashUsageTimer < 0)
+            if (Input.GetKeyDown(KeyCode.LeftShift) && SkillManager.instance.Dash.CanUseSkill())
             {
-                dashUsageTimer = dashCooldown;
                 dashDirection = Input.GetAxisRaw("Horizontal");
                 if (dashDirection == 0)
                 {

@@ -33,6 +33,7 @@ namespace Enemy
         {
             base.Awake();
             StateMachine = new EnemyStateMachine();
+            counterImage.SetActive(false);
         }
 
         protected override void Start()
