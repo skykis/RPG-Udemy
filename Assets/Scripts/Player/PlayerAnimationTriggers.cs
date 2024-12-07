@@ -24,5 +24,10 @@ namespace Player
                 }
             }
         }
+
+        private void ThrowSword()
+        {
+            SkillManager.instance.Sword.CreateSword();
+        }
     }
 }

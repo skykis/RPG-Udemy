@@ -18,6 +18,10 @@ namespace Player
         {
             base.Update();
 
+            if (Input.GetKeyDown(KeyCode.Mouse1) && HasNoSword())
+            {
+                StateMachine.ChangeState(Player.AimSwordState);
+            }
             if (Input.GetKeyDown(KeyCode.Q))
             {
                 StateMachine.ChangeState(Player.CounterAttackState);
@@ -41,6 +45,18 @@ namespace Player
         public override void Exit()
         {
             base.Exit();
+        }
+
+        private bool HasNoSword()
+        {
+            if (!Player.Sword)
+            {
+                return true;
+            }
+
+            Player.Sword.GetComponent<SwordSkillController>().ReturnSword();
+
+            return false;
         }
     }
 }

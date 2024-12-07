@@ -20,7 +20,7 @@ namespace Player
 
         
         public SkillManager Skill {get; private set;}
-        
+        public GameObject Sword; //{get; private set;}
         
         #region States
 
@@ -34,6 +34,8 @@ namespace Player
         public PlayerWallJumpState WallJumpState { get; private set; }
         public PlayerPrimaryAttackState PrimaryAttackState { get; private set; }
         public PlayerCounterAttackState CounterAttackState { get; private set; }
+        public PlayerAimSwordState AimSwordState { get; private set; }
+        public PlayerCatchSwordState CatchSwordState { get; private set; }
 
         #endregion
 
@@ -50,8 +52,12 @@ namespace Player
             DashState = new PlayerDashState(this, StateMachine, "Dash");
             WallSlideState = new PlayerWallSlideState(this, StateMachine, "WallSlide");
             WallJumpState = new PlayerWallJumpState(this, StateMachine, "Jump");
+            
             PrimaryAttackState = new PlayerPrimaryAttackState(this, StateMachine, "Attack");
             CounterAttackState = new PlayerCounterAttackState(this, StateMachine, "CounterAttack");
+            
+            AimSwordState = new PlayerAimSwordState(this, StateMachine, "AimSword");
+            CatchSwordState = new PlayerCatchSwordState(this, StateMachine, "CatchSword");
         }
 
         protected override void Start()
@@ -97,6 +103,16 @@ namespace Player
 
                 StateMachine.ChangeState(DashState);
             }
+        }
+
+        public void AssignNewSword(GameObject newSword)
+        {
+            Sword = newSword;
+        }
+
+        public void ClearTheSword()
+        {
+            Destroy(Sword);
         }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Skill
@@ -5,23 +6,30 @@ namespace Skill
     public class Skill : MonoBehaviour
     {
         [SerializeField] protected float cooldown;
-        protected float CooldownTimer;
+        private float cooldownTimer;
+
+        protected Player.Player Player;
+
+        protected virtual void Start()
+        {
+            Player = PlayerManager.instance.player;
+        }
 
         protected virtual void Update()
         {
-            CooldownTimer -= Time.deltaTime;
+            cooldownTimer -= Time.deltaTime;
         }
 
         public virtual bool CanUseSkill()
         {
-            return CooldownTimer < 0;
+            return cooldownTimer < 0;
         }
 
         public virtual void UseSkill()
         {
             if (CanUseSkill())
             {
-                CooldownTimer = cooldown;
+                cooldownTimer = cooldown;
             }
         }
     }
