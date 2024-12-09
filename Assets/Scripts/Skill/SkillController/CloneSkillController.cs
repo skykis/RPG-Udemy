@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Prefab
+namespace Skill.SkillController
 {
     public class CloneSkillController : MonoBehaviour
     {

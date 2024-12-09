@@ -13,6 +13,7 @@ namespace Player
         [Header("Move info")] 
         public float moveSpeed;
         public float jumpForce;
+        public float swordReturnImpact;
         [Header("Dash info")] 
         public float dashSpeed;
         public float dashDuration;
@@ -20,7 +21,7 @@ namespace Player
 
         
         public SkillManager Skill {get; private set;}
-        public GameObject Sword; //{get; private set;}
+        public GameObject Sword {get; private set;}
         
         #region States
 
@@ -112,6 +113,7 @@ namespace Player
 
         public void ClearTheSword()
         {
+            StateMachine.ChangeState(CatchSwordState);
             Destroy(Sword);
         }
     }

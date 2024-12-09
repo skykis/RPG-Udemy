@@ -20,15 +20,23 @@ namespace Player
         {
             base.Update();
 
+            Player.SetZeroVelocity();
+            
             if (Input.GetKeyUp(KeyCode.Mouse1))
             {
                 StateMachine.ChangeState(Player.IdleState);
             }
+
+            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+            Player.FlipController(mousePosition.x - Player.transform.position.x);
         }
 
         public override void Exit()
         {
             base.Exit();
+            
+            Player.StartCoroutine(nameof(global::Player.Player.BusyFor), 0.2f);
         }
     }
 }

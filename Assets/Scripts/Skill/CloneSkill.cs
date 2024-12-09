@@ -1,4 +1,4 @@
-using Prefab;
+using Skill.SkillController;
 using UnityEngine;
 
 namespace Skill

@@ -3741,10 +3741,10 @@ MonoBehaviour:
   counterAttackDuration: 0.2
   moveSpeed: 8
   jumpForce: 12
+  swordReturnImpact: 3
   dashSpeed: 25
   dashDuration: 0.2
   dashDirection: 0
-  Sword: {fileID: 0}
 --- !u!4 &136347267
 Transform:
   m_ObjectHideFlags: 0
@@ -3754,7 +3754,7 @@ Transform:
   m_GameObject: {fileID: 136347265}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.6, y: -1.45, z: 0}
+  m_LocalPosition: {x: -1.6, y: -1.664652, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4268,7 +4268,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.6065187, y: 3.4544024, z: -2.208754}
+  m_LocalPosition: {x: -4.6065187, y: 3.2397506, z: -2.208754}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4504,7 +4504,7 @@ Transform:
   m_GameObject: {fileID: 804647226}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.6065187, y: 3.4544024, z: -2.208754}
+  m_LocalPosition: {x: -4.6065187, y: 3.2397506, z: -2.208754}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7862,7 +7862,7 @@ Transform:
   m_GameObject: {fileID: 2012385852}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.84, y: 0.44, z: 0}
+  m_LocalPosition: {x: 7.84, y: 0.4412, z: 0}
   m_LocalScale: {x: 1.4, y: 1.4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
