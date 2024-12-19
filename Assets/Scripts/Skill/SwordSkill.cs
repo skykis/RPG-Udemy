@@ -1,3 +1,4 @@
+using System;
 using Skill.SkillController;
 using UnityEngine;
 
@@ -16,8 +17,12 @@ namespace Skill
         public SwordType swordType = SwordType.Regular;
         
         [Header("Bounce info")]
-        [SerializeField] private int amountOfBounces;
+        [SerializeField] private int bounceAmount;
         [SerializeField] private float bounceGravity;
+        
+        [Header("Pierce info")]
+        [SerializeField] private int pierceAmount;
+        [SerializeField] private float pierceGravity;
         
         [Header("Sword info")] 
         [SerializeField] private GameObject swordPrefab;
@@ -41,9 +46,21 @@ namespace Skill
             GenerateDots();
         }
 
+        private void SetupGravity()
+        {
+            swordGravity = swordType switch
+            {
+                SwordType.Bounce => bounceGravity,
+                SwordType.Pierce => pierceGravity,
+                _ => swordGravity
+            };
+        }
+
         protected override void Update()
         {
             base.Update();
+
+            SetupGravity();
 
             if (Input.GetKeyUp(KeyCode.Mouse1))
             {
@@ -67,8 +84,10 @@ namespace Skill
 
             if (swordType == SwordType.Bounce)
             {
-                swordGravity = bounceGravity;
-                newSwordScript.SetupBounce(true, amountOfBounces);
+                newSwordScript.SetupBounce(true, bounceAmount);
+            } else if (swordType == SwordType.Pierce)
+            {
+                newSwordScript.SetupPierce(pierceAmount);
             }
             
             

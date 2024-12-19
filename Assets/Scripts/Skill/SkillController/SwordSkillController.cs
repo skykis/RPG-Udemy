@@ -15,10 +15,13 @@ namespace Skill.SkillController
         private bool isReturning;
         [SerializeField] private float returnSpeed;
 
+        [Header("Pierce info")]
+        [SerializeField] private int pierceAmount;
+        
         [Header("Bounce info")]
         [SerializeField] private float bounceSpeed;
         private bool isBouncing;
-        private int amountOfBounce;
+        private int bounceAmount;
         private List<Transform> enemyTarget;
         private int targetIndex;
         
@@ -35,15 +38,23 @@ namespace Skill.SkillController
             rb.gravityScale = gravityScale;
             this.player = player;
 
-            animator.SetBool(Rotation, true);
+            if (pierceAmount <= 0)
+            {
+                animator.SetBool(Rotation, true);
+            }
         }
 
-        public void SetupBounce(bool isBouncing, int amountOfBounce)
+        public void SetupBounce(bool isBouncing, int bounceAmount)
         {
             this.isBouncing = isBouncing;
-            this.amountOfBounce = amountOfBounce;
+            this.bounceAmount = bounceAmount;
             
             enemyTarget = new List<Transform>();
+        }
+
+        public void SetupPierce(int pierceAmount)
+        {
+            this.pierceAmount = pierceAmount;
         }
         
         public void ReturnSword()
@@ -85,9 +96,9 @@ namespace Skill.SkillController
                 if (Vector2.Distance(transform.position, enemyTarget[targetIndex].position) < 0.1f)
                 {
                     targetIndex++;
-                    amountOfBounce--;
+                    bounceAmount--;
 
-                    if (amountOfBounce <=0)
+                    if (bounceAmount <=0)
                     {
                         isBouncing = false;
                         isReturning = true;
@@ -108,6 +119,8 @@ namespace Skill.SkillController
                 return;
             }
 
+            collision.GetComponent<Enemy.Enemy>()?.Damage();
+            
             if (collision.GetComponent<Enemy.Enemy>() != null)
             {
                 if (isBouncing && enemyTarget.Count <= 0)
@@ -129,6 +142,12 @@ namespace Skill.SkillController
 
         private void StuckInto(Collider2D collision)
         {
+            if (pierceAmount > 0 && collision.GetComponent<Enemy.Enemy>() != null)
+            {
+                pierceAmount--;
+                return;
+            }
+            
             canRotate = false;
             cd.enabled = false;
         
